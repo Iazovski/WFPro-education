@@ -41,7 +41,7 @@ console.log (servicePercentPrice);
 if (fullPrice >= 50000) {
     console.log('Даем скидку 10%');
 
-} else if (50000 > fullPrice >= 20000) {
+} else if (fullPrice >= 20000 && fullPrice < 50000) {
     console.log('Даем скидку 5%');
 
 }  else if (20000 > fullPrice > 0) {
