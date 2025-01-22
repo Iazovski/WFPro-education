@@ -63,8 +63,8 @@ function getTitle () {
 };
 getTitle();
 
-function getServicePercentPrices (fullPriceServices,servicePercentPrice ) {
-    servicePercentPrice = Math.round(fullPriceServices - fullPriceServices * percentage / 100);
+function getServicePercentPrices () {
+    let servicePercentPrice = Math.round(fullPriceServices - fullPriceServices * percentage / 100);
     return fullPriceServices - servicePercentPrice;
 };
 
