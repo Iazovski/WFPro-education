@@ -30,13 +30,13 @@ let serviceYetPrice = prompt('Сколько будет стоить этот в
 
 console.log(serviceYetPrice);
 
-let fullPrice = screenPrice + +servicePrice + +serviceYetPrice;
+/*let fullPrice = screenPrice + +servicePrice + +serviceYetPrice;
 console.log(fullPrice);
+*/
 
-
-let servicePercentPrice = Math.round(fullPrice - fullPrice * percentage / 100);
+/*let servicePercentPrice = Math.round(fullPrice - fullPrice * percentage / 100);
 console.log (servicePercentPrice);
-
+*/
 
 
 
@@ -56,31 +56,34 @@ console.log(fullPriceServices);
 function getTitle () {
     let firstChar = titleProject.charAt(0);
     let upperFirstChar = firstChar.toUpperCase();
-    let restOfString = titleProject.slice(1);
+    let restOfString = titleProject.slice(1);  
     let restOfStringLow = restOfString.toLowerCase();
     let newTitleProject = upperFirstChar + restOfStringLow;
-    console.log(newTitleProject);
+    console.log(newTitleProject.replaceAll(' ', ''));
 };
 getTitle();
 
 function getServicePercentPrices (fullPriceServices,servicePercentPrice ) {
+    servicePercentPrice = Math.round(fullPriceServices - fullPriceServices * percentage / 100);
     return fullPriceServices - servicePercentPrice;
 };
+
 getServicePercentPrices();
+
 let servicePercentPriceWithout = getServicePercentPrices();
-console.log(servicePercentPrice);
+console.log(servicePercentPriceWithout);
 
 function getRollbackMessage() {
-    if (fullPrice >= 50000) {
+    if (fullPriceServices >= 50000) {
         console.log('Даем скидку 10%');
     
-    } else if (fullPrice >= 20000 && fullPrice < 50000) {
+    } else if (fullPriceServices >= 20000 && fullPriceServices < 50000) {
         console.log('Даем скидку 5%');
     
-    }  else if (20000 > fullPrice > 0) {
+    }  else if (20000 > fullPriceServices > 0) {
         console.log('Скидка не предусмотрена');
     
-    } else if (fullPrice < 0) {
+    } else if (fullPriceServices < 0) {
         console.log('Что-то пошло не так');
     };
 };
