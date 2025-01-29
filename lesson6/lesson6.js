@@ -1,36 +1,39 @@
-let screenPrice;
+let screenPrice = 30000;
 let percentage = 10;
-let titleProject;
-let screensValue;
-let responsive;
-let service;
-let serviceYet;
 
-function getTitle () {
-    let firstChar = titleProject.charAt(0);
-    let upperFirstChar = firstChar.toUpperCase();
-    let restOfString = titleProject.slice(1);  
-    let restOfStringLow = restOfString.toLowerCase();
-    let newTitleProject = upperFirstChar + restOfStringLow;
+
+let titleProject = prompt('Укажите название проекта');
+console.log(titleProject);
+
+let screensValue = prompt('Укажите типы экранов');
+console.log(screensValue);
+
+let responsive = prompt('Нужен ли адаптивный сайт?');
+console.log(responsive);
+
+/*let service = prompt('Какой сервис нужен?');
+console.log(service);
+
+let servicePrice = prompt('Сколько это будет стоить?');
+
+console.log(servicePrice);
+
+let serviceYet = prompt('Какой еще сервис тебе нужен?');
+console.log(serviceYet);
+
+let serviceYetPrice = prompt('Сколько будет стоить этот второй сервис?');
+
+console.log(serviceYetPrice);
+
+
+let getAllServicePrices = function (servicePrice,serviceYetPrice) {
+    return +servicePrice + +serviceYetPrice;
 };
-
+*/
 let checkIsNumber = (num) => {
     return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
-const briefing = () => {
-    titleProject = prompt('Укажите название проекта');
-    screensValue = prompt('Укажите типы экранов');
-    screenPrice = prompt('Сколько будет стоить экран?');
-
-    while (!checkIsNumber(screenPrice) || screenPrice === NaN || screenPrice.trim() === '') {
-        screenPrice = prompt('Сколько будет стоить экран?');
-    }; 
-    screenPrice = Number(screenPrice);
-    responsive = prompt('Нужен ли адаптивный сайт?');
-};
-
-//общая сумма всех услуг
 const getAllServicePrices = () => {
     let sumService = 0;
 
@@ -50,47 +53,63 @@ const getAllServicePrices = () => {
 
         sumService = sumService + Number(promtPrice);
     };
+    return sumService;
 };
 
+let allSumService = getAllServicePrices();
+console.log (allSumService);
+/*const allServicePrices = getAllServicePrices();
+console.log(allServicePrices);*/
 
-
+/*const allServicePrices = getAllServicePrices(servicePrice,serviceYetPrice);
+console.log(allServicePrices);*/
 
 function getFullPrice () {
-    return screenPrice + allServicePrices;
-}
+    return allSumService + screenPrice;
+};
+const fullPriceServices = getFullPrice();
+console.log(fullPriceServices);
+
+
+function getTitle () {
+    let firstChar = titleProject.charAt(0);
+    let upperFirstChar = firstChar.toUpperCase();
+    let restOfString = titleProject.slice(1);  
+    let restOfStringLow = restOfString.toLowerCase();
+    let newTitleProject = upperFirstChar + restOfStringLow;
+    console.log(newTitleProject.replaceAll(' ', ''));
+};
+getTitle();
 
 function getServicePercentPrices () {
-    return fullPrice - (fullPrice * (percentage / 100));
+    let servicePercentPrice = Math.round(fullPriceServices - fullPriceServices * percentage / 100);
+    return fullPriceServices - servicePercentPrice;
 };
 
+getServicePercentPrices();
 
 
-let getDiscount = (value) => {
-    if (value >= 50000) {
-        return 'Даем скидку 10%';
-    } else if (value >= 20000 && value < 50000) {
-        return 'Даем скидку 5%';
-    }  else if (20000 > value > 0) {
-        return 'Скидка не предусмотрена';
-    } else if (value < 0) {
-        return 'Что-то пошло не так';
+
+
+let servicePercentPriceWithout = getServicePercentPrices();
+console.log(servicePercentPriceWithout);
+
+function getRollbackMessage() {
+    if (fullPriceServices >= 50000) {
+        console.log('Даем скидку 10%');
+    
+    } else if (fullPriceServices >= 20000 && fullPriceServices < 50000) {
+        console.log('Даем скидку 5%');
+    
+    }  else if (20000 > fullPriceServices > 0) {
+        console.log('Скидка не предусмотрена');
+    
+    } else if (fullPriceServices < 0) {
+        console.log('Что-то пошло не так');
     };
 };
+getRollbackMessage();
 
 
-let submit = confirm ('Подтвердите переход на страницу');
-
-briefing();
-let allServicePrices = getAllServicePrices();
-let fullPrice = getFullPrice();
-let servicePercentPrice = getServicePercentPrices();
-let newTitleProject = getTitle();
-
-
-console.log(newTitleProject);
-console.log(allServicePrices);
-console.log(fullPrice);
-console.log(Math.ceil(servicePercentPrice));
-console.log(serviceYet);
-console.log(getServicePercentPrices(fullPrice));
-
+/*let allSumService = getAllServicePrices();
+console.log (allSumService);*/
