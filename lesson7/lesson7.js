@@ -38,14 +38,12 @@ const gameBotFunction = () => {
             randomResult = getRandomNumber(1, 100);
         } else {
             attempt = 0;
-        }53
+        }
     };
 
-    if (attempt > 0) {
-        attempt--
+    for (attempt; attempt > 0; attempt--) {
         userNumPromt();
-    } else {
-        let attemptIsOver = comfirm('Игра окончена, твои попытки закончились! Хочешь еще?');
+        let attemptIsOver = confirm('Игра окончена, твои попытки закончились! Хочешь еще?');
         if (attemptIsOver) {
             attempt = 3;
             userNumPromt();
@@ -53,7 +51,9 @@ const gameBotFunction = () => {
             console.log('Игра окончена');
             return
         }
-    }
-}; 
+    };
+        
+};
+
 
 gameBotFunction();
