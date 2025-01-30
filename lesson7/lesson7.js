@@ -1,59 +1,61 @@
 const gameBotFunction = () => {
-
-    function getRandomNumber(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min);
+    let getRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
     let randomResult = getRandomNumber(1, 100);
-    let attempt = 3;
-    
+    let attempt = 5;
+
     let checkIsNumber = (num) => {
-        return !isNaN(parseFloat(num)) && isFinite(num);
+        return !isNaN(num) && num.trim() !== '';
     };
 
     let userNumPromt = () => {
-        userNum = prompt('Угадай какое число я загадал от 1 до 100');
+        while (attempt > 0) {
+            let userNum = prompt(`Угадай число от 1 до 100. Осталось попыток: ` + attempt);
+
             if (userNum === null) {
-                console.log('Игра окончена');
-        }; return userNum;
-    };
-    
-    let userNum = '';
+                alert('Игра окончена');
+                return;
+            }
 
-    while (!checkIsNumber(userNum) || userNum.trim() === '') {
-        userNum = prompt('Угадай какое число я загадал от 1 до 100');
-    }; 
-    userNum = Number(userNum);
+            if (!checkIsNumber(userNum)) {
+                alert('Введите число!');
+                continue;
+            }
 
-    if (userNum > randomResult) {
-        console.log('Не угадал, твое число больше моего');
-    } else if (userNum < randomResult) {
-        console.log('Не угадал, твое число меньше моего');
-    } else if (userNum === randomResult) {
-        let newGame = confirm('Поздравляю с победой, Сир! Хотите сыграть еще?');
-        if (newGame) {
-            attempt = 3;
-            randomResult = getRandomNumber(1, 100);
-        } else {
-            attempt = 0;
+            userNum = Number(userNum);
+
+            if (userNum === randomResult) {
+                let newGame = confirm('Поздравляю с победой, Сир! Хотите сыграть еще?');
+                if (newGame) {
+                    randomResult = getRandomNumber(1, 100);
+                    attempt = 5;
+                    userNumPromt(); 
+                } else {
+                    alert('Игра окончена');
+                }
+                return;
+            } else if (userNum > randomResult) {
+                alert('Не угадал, твое число больше моего');
+            } else {
+                alert('Не угадал, твое число меньше моего');
+            }
+
+            attempt--;
         }
-    };
 
-    for (attempt; attempt > 0; attempt--) {
-        userNumPromt();
         let attemptIsOver = confirm('Игра окончена, твои попытки закончились! Хочешь еще?');
         if (attemptIsOver) {
-            attempt = 3;
-            userNumPromt();
+            randomResult = getRandomNumber(1, 100);
+            attempt = 5;
+            userNumPromt();; 
         } else {
-            console.log('Игра окончена');
-            return
+            alert('Игра окончена');
         }
     };
-        
-};
 
+    userNumPromt();; // Начало игры
+};
 
 gameBotFunction();
