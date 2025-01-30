@@ -58,6 +58,7 @@ const getAllServicePrices = () => {
 
 let allSumService = getAllServicePrices();
 console.log (allSumService);
+
 /*const allServicePrices = getAllServicePrices();
 console.log(allServicePrices);*/
 
